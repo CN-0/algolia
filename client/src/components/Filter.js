@@ -59,8 +59,8 @@ class Filter extends Component {
             title={"Search"}
             id={"type"}
             value={this.state.type}
-            options={["all", "stories", "comments"]}
-            option_values={["all", "story", "comment"]}
+            options={["stories", "comments"]}
+            option_values={["story", "comment"]}
             handleChange={this.handleChange}
           />
           <Select
@@ -81,7 +81,6 @@ class Filter extends Component {
               "past week",
               "past month",
               "past year",
-              "custom range",
             ]}
             option_values={[
               "all",

@@ -8,6 +8,7 @@ const Header = (props) => {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       props.handleChange(searchTerm);
+      props.sendSearches(props.token, searchTerm);
     }
   };
 
@@ -67,6 +68,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: (token) => dispatch(actions.logout(token)),
+    sendSearches: (token, item) => dispatch(actions.postSearches(token, item)),
   };
 };
 

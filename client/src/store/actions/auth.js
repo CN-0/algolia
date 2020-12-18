@@ -75,6 +75,20 @@ export const register = (registerData) => {
   };
 };
 
+export const postSearches = (token, item) => {
+  return (dispatch) => {
+    Axios.post(
+      "/users/searches",
+      { item },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((response) => {})
+      .catch((err) => {
+        dispatch(authFail(err.response.data.msg));
+      });
+  };
+};
+
 export const authCheckState = () => {
   return (dispatch) => {
     const algolia = localStorage.getItem("algolia");

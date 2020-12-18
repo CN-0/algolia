@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import LoginForm from "./views/LoginForm";
-import RegistrationForm from "./views/RegistrationForm";
-import Home from "./views/Home";
+import React, { useEffect, Suspense, lazy } from "react";
 import * as actions from "./store/actions/index";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import AlertComponent from "./components/AlertComponent";
+
+const Home = lazy(() => import("./views/Home"));
+const LoginForm = lazy(() => import("./views/LoginForm"));
+const RegistrationForm = lazy(() => import("./views/RegistrationForm"));
 
 function App(props) {
   useEffect(() => {
@@ -29,10 +30,12 @@ function App(props) {
     );
   }
   return (
-    <div className="App">
-      {routes}
-      <AlertComponent />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="App">
+        {routes}
+        <AlertComponent />
+      </div>
+    </Suspense>
   );
 }
 
