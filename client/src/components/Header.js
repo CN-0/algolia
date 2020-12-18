@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import * as actions from "../store/actions/index";
 
 const Header = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -48,12 +49,25 @@ const Header = (props) => {
           aria-label="Search"
         />
       </div>
+      <button
+        onClick={() => props.logout(props.token)}
+        className="btn btn-logout"
+      >
+        Logout
+      </button>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   username: state.auth.username,
+  token: state.auth.token,
 });
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: (token) => dispatch(actions.logout(token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
